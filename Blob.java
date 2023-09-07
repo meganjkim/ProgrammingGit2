@@ -12,20 +12,6 @@ import java.nio.file.*;
 public class Blob 
 {
 
-    public static void main(String[] args) {
-        String inputFile = "1-1000.txt";
-        String outputFolder = "objects";
-
-        try {
-            String hash = Blob.createBlob(inputFile, outputFolder);
-            System.out.println("SHA-1 Hash: " + hash);
-            System.out.println("Blob file created in " + outputFolder);
-        } catch (IOException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            System.err.println("An error occurred: " + e.getMessage());
-        }
-    }
-
     public static String calculateSHA1(String filePath) throws IOException, NoSuchAlgorithmException {
         MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
         try (InputStream fileInputStream = new FileInputStream(filePath)) {
