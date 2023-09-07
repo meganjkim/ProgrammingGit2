@@ -11,7 +11,7 @@ import java.nio.file.*;
 
 public class Blob 
 {
-
+    
     public static String calculateSHA1(String filePath) throws IOException, NoSuchAlgorithmException {
         MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
         try (InputStream fileInputStream = new FileInputStream(filePath)) {
@@ -48,18 +48,18 @@ public class Blob
         }
         return bytes.toByteArray();
     }
-public static String createBlob (String inputFile, String outputFolder) throws IOException, NoSuchAlgorithmException
+public static String createBlob (String inputFile) throws IOException, NoSuchAlgorithmException
 {
 byte [] data = readFile (inputFile);
 String hash = calculateSHA1(new String (data));
 
-File folder = new File (outputFolder);
+File folder = new File ("objects");
 
 if (!folder.exists())
 {
     folder.mkdir();
 }
-String outputFile = outputFolder + File.separator + hash;
+String outputFile = "objects" + File.separator + hash;
 Files.write (Paths.get (outputFile), data);
     return hash;
 }
