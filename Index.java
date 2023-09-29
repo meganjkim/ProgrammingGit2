@@ -24,20 +24,20 @@ public class Index {
     public void createBlobs(String originalFileName, String sha1Hash) throws IOException {
         blobMap.put(originalFileName, sha1Hash);
 
-        
         String entry = originalFileName + " : " + sha1Hash;
         Files.write(Paths.get(indexFile), (entry + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
     }
 
     public void removeBlobs(String originalFileName) throws IOException {
-        
+
         blobMap.remove(originalFileName);
 
         // Read the current content of the 'index' file
         List<String> lines = Files.readAllLines(Paths.get(indexFile));
         List<String> newLines = new ArrayList<>();
 
-        // Iterate through the lines and exclude the entry with the specified originalFileName
+        // Iterate through the lines and exclude the entry with the specified
+        // originalFileName
         for (String line : lines) {
             String[] parts = line.split(" : ");
             if (parts.length == 2 && !parts[0].equals(originalFileName)) {

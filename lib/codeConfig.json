@@ -1,39 +1,10 @@
 [
     {
-        "className": "Git",
+        "className": "Blob",
         "constructorConfigs": [
             {
                 "parameterTypes": [],
                 "values": []
-            }
-        ],
-        "methodConfigs": [
-            {
-                "methodName": "init",
-                "parameters": [],
-                "values": []
-            },
-            {
-                "methodName": "add",
-                "parameters": [
-                    "String"
-                ],
-                "values": [
-                    "__TEST_FILE_NAME__"
-                ]
-            }
-        ]
-    },
-    {
-        "className": "Blob",
-        "constructorConfigs": [
-            {
-                "parameterTypes": [
-                    "String"
-                ],
-                "values": [
-                    "__TEST_FILE_NAME__"
-                ]
             }
         ],
         "methodConfigs": [
@@ -45,6 +16,65 @@
                 "values": [
                     "filePath"
                 ]
+            },
+            {
+                "methodName": "readFile",
+                "parameters": [
+                    "String"
+                ],
+                "values": [
+                    "inputFile"
+                ]
+            },
+            {
+                "methodName": "createBlob",
+                "parameters": [
+                    "String"
+                ],
+                "values": [
+                    "inputFile"
+                ]
+            }
+        ]
+    },
+    {
+        "className": "Index",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "initProject",
+                "parameters": [],
+                "values": []
+            },
+            {
+                "methodName": "createBlobs",
+                "parameters": [
+                    "String",
+                    "String"
+                ],
+                "values": [
+                    "originalFileName",
+                    "sha1Hash"
+                ]
+            },
+            {
+                "methodName": "removeBlobs",
+                "parameters": [
+                    "String"
+                ],
+                "values": [
+                    "originalFileName"
+                ]
+            },
+            {
+                "methodName": "getBlobMap",
+                "parameters": [],
+                "values": []
             }
         ]
     }
