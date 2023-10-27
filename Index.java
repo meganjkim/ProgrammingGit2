@@ -19,6 +19,11 @@ public class Index {
         if (!Files.exists(indexPath)) {
             Files.createFile(indexPath);
         }
+        Path objectsDir = Paths.get("./objects");
+        if (!Files.exists(Paths.get("./objects"))) {
+            Files.createFile(Paths.get("./objects"));
+        }
+
     }
 
     public void createBlobs(String originalFileName, String sha1Hash) throws IOException {

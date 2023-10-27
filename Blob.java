@@ -48,14 +48,14 @@ public class Blob {
 
     public static String createBlob(String inputFile) throws IOException, NoSuchAlgorithmException {
         byte[] data = readFile(inputFile);
-        String hash = calculateSHA1(new String(data));
+        String hash = calculateSHA1(inputFile);
 
         File folder = new File("objects");
 
         if (!folder.exists()) {
             folder.mkdir();
         }
-        String outputFile = "objects" + File.separator + hash;
+        String outputFile = "objects/" + hash;
         Files.write(Paths.get(outputFile), data);
         return hash;
     }
