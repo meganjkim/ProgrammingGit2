@@ -26,9 +26,10 @@ public class Tree {
         String fileContents = Utils.arrayListToFileString(contents);
         String hash = Utils.calculateSHA1(fileContents);
 
+        Utils.writeToFile("./objects/" + hash, fileContents);
     }
 
-    private boolean contains(String line) {
+    public boolean contains(String line) {
         for (String s : contents) {
             if (s.equals(line)) {
                 return true;
