@@ -22,6 +22,12 @@ public class Tree {
         }
     }
 
+    public void save() throws Exception {
+        String fileContents = Utils.arrayListToFileString(contents);
+        String hash = Utils.calculateSHA1(fileContents);
+
+    }
+
     private boolean contains(String line) {
         for (String s : contents) {
             if (s.equals(line)) {
