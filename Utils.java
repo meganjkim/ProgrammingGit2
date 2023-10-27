@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Formatter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -10,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.file.*;
 import java.io.*;
+import java.io.*;
+import java.util.logging.*;
 
 public class Utils {
 
@@ -17,33 +20,36 @@ public class Utils {
         String s = "";
 
         for (int i = 0; i < al.size() - 1; i++) {
-            s += al.get(i);
+            s += al.get(i) + "\n";
         }
         s += al.get(al.size() - 1);
 
         return s;
     }
 
-    public static String calculateSHA1(String filePath) throws IOException, NoSuchAlgorithmException {
-        MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
-        try (InputStream fileInputStream = new FileInputStream(filePath)) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                sha1Digest.update(buffer, 0, bytesRead);
-            }
+    public static String calculateSHA1(String password) {
+        String sha1 = "";
+        try {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(password.getBytes("UTF-8"));
+            sha1 = byteToHex(crypt.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        byte[] sha1Hash = sha1Digest.digest();
-        StringBuilder hexString = new StringBuilder();
-        for (byte hashByte : sha1Hash) {
-            String hex = Integer.toHexString(0xFF & hashByte);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
+        return sha1;
+    }
 
-        return hexString.toString();
+    private static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 
     public static String readFile(String inputFile) throws IOException {

@@ -2,16 +2,18 @@ import java.util.*;
 import java.io.*;
 
 public class Tree {
-    static ArrayList<String> contents;
+    private static ArrayList<String> contents;
+    private String SHA1;
 
     public Tree() {
         contents = new ArrayList<String>();
     }
 
     public void add(String line) {
-        if (contains(line))
+        if (containsLine(line))
             return;
 
+        contents.add(line);
     }
 
     public void remove(String s) {
@@ -22,20 +24,25 @@ public class Tree {
         }
     }
 
-    public void save() throws Exception {
+    public String save() throws Exception {
         String fileContents = Utils.arrayListToFileString(contents);
-        String hash = Utils.calculateSHA1(fileContents);
+        SHA1 = Utils.calculateSHA1(fileContents);
 
-        Utils.writeToFile("./objects/" + hash, fileContents);
+        Utils.writeToFile("./objects/" + SHA1, fileContents);
+
+        return SHA1;
+
     }
 
-    public boolean contains(String line) {
+    public String getSHA1() {
+        return SHA1;
+    }
+
+    public boolean containsLine(String line) {
         for (String s : contents) {
-            if (s.equals(line)) {
+            if (s.equals(line))
                 return true;
-            }
         }
         return false;
-
     }
 }
