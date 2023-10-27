@@ -31,4 +31,14 @@ public class TreeTester {
         t.add("blob : 01d82591292494afd1602d175e165f94992f6f5f : file2.txt");
         assertTrue(t.contains("blob : 01d82591292494afd1602d175e165f94992f6f5f : file2.txt"));
     }
+
+    @Test
+    public void testAdd() throws Exception {
+        Tree t = new Tree();
+        t.add("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f : file1.txt");
+        t.add("blob : 01d82591292494afd1602d175e165f94992f6f5f : file2.txt");
+
+        assertTrue(t.contains("blob : 81e0268c84067377a0a1fdfb5cc996c93f6dcf9f : file1.txt"));
+        assertTrue(t.contains("blob : 01d82591292494afd1602d175e165f94992f6f5f : file2.txt"));
+    }
 }
