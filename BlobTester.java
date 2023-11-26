@@ -93,7 +93,9 @@ public class BlobTester {
     @DisplayName("[15] Test if adding a blob works.  5 for sha, 5 for file contents, 5 for correct location")
     void testCreateBlob() throws Exception {
 
-        String sha = Blob.createBlob("./milo.txt");
+        Blob b = new Blob("./milo.txt");
+
+        String sha = Utils.calculateSHA1(Utils.readFile("./milo.txt"));
 
         // Check blob exists in the objects folder
         File file_junit1 = new File("objects/" + sha);

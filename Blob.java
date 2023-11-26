@@ -11,17 +11,31 @@ import java.nio.file.*;
 
 public class Blob {
 
-    public static String createBlob(String inputFile) throws IOException, NoSuchAlgorithmException {
-        byte[] data = Utils.readFile(inputFile);
-        String hash = Utils.calculateSHA1(inputFile);
+    private String SHA;
 
-        File folder = new File("objects");
+    public Blob(String fileName) throws Exception {
+        SHA = createBlob(fileName);
+    }
+
+    public String getSHA() {
+        return SHA;
+    }
+
+    private String createBlob(String inputFile) throws IOException, NoSuchAlgorithmException {
+        String fileContent = Utils.readFile(inputFile);
+        String hash = Utils.calculateSHA1(fileContent);
+
+        File folder = new File("./objects");
 
         if (!folder.exists()) {
             folder.mkdir();
         }
-        String outputFile = "objects/" + hash;
-        Files.write(Paths.get(outputFile), data);
+
+        File newBlob = new File("./objects/" + hash);
+        newBlob.createNewFile();
+
+        Utils.writeToFile("./objects/" + hash, fileContent);
+
         return hash;
     }
 }
