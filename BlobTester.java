@@ -74,21 +74,6 @@ public class BlobTester {
 
     }
 
-    // @Test
-    // @DisplayName("[8] Test if initialize and objects are created correctly")
-    // void testInitialize() throws Exception {
-
-    // // Run the person's code
-    // // TestHelper.runTestSuiteMethods("testInitialize");
-
-    // // check if the file exists
-    // File file = new File("index");
-    // Path path = Paths.get("objects");
-
-    // assertTrue(file.exists());
-    // assertTrue(Files.exists(path));
-    // }
-
     @Test
     @DisplayName("[15] Test if adding a blob works.  5 for sha, 5 for file contents, 5 for correct location")
     void testCreateBlob() throws Exception {
@@ -103,6 +88,6 @@ public class BlobTester {
 
         // Read file contents
         assertEquals("File contents of Blob don't match file contents pre-blob creation", testFileContents,
-                Files.readString(Paths.get("objects/" + sha)));
+                Utils.readFile("./objects/" + sha));
     }
 }
